@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Remis Touch | Premium Painting, Joinery & Property Maintenance London</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #b38f4d;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        /* Navigation */
+        header { background: rgba(18, 18, 18, 0.95); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: #fff; }
+        .nav-links a { color: var(--text-light); text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero Section */
+        .hero { height: 90vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=80') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; margin-top: 60px; }
+        .hero-content { max-width: 800px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; }
+        .btn { display: inline-block; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 700; text-transform: uppercase; transition: 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background: var(--dark-gold); color: #fff; }
+
+        /* Services Section */
+        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 40px; text-transform: uppercase; border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 10px; }
+        .title-wrapper { text-align: center; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: var(--card-bg); border: 1px solid #333; border-radius: 8px; padding: 30px; transition: 0.3s; }
+        .service-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .service-card h3 { color: var(--gold); font-size: 1.4rem; margin-bottom: 15px; }
+
+        /* Interactive Estimate Calculator */
+        .calc-box { background: var(--card-bg); border: 1px solid var(--gold); padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group select, .form-group input { width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 4px; }
+        .result-box { text-align: center; margin-top: 20px; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+
+        /* Footer / Contact */
+        footer { background: #0a0a0a; border-top: 1px solid #222; padding: 40px 20px; text-align: center; color: var(--text-muted); }
+        footer h3 { color: var(--gold); margin-bottom: 15px; }
+        footer a { color: var(--text-light); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">The Remis <span>Touch</span></div>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#calculator">Estimate Tool</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Craftsmanship in <span>Every Detail</span></h1>
+            <p>London's Specialist in LVT Joinery, Premium Painting, and Railing Restoration.</p>
+            <a href="tel:+447539371010" class="btn">Call Now: 07539 371 010</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+        <div class="title-wrapper">
+            <h2 class="section-title">Our Services</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Exterior & Interior Painting</h3>
+                <p>Full substrate preparation, chemical washing, crack repairs, and top-tier painting for residential facades and indoor spaces.</p>
+            </div>
+            <div class="service-card">
+                <h3>Metal Railings & Gates Restoration</h3>
+                <p>Intensive hand-scraping, wire-brushing, rust stabilization, and anti-corrosive gloss application for long-lasting weather protection.</p>
+            </div>
+            <div class="service-card">
+                <h3>LVT & Joinery Services</h3>
+                <p>Precision installation of LVT flooring, wood repairs, window sill restoration, and bespoke property maintenance solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Estimate Calculator -->
+    <section id="calculator" class="section">
+        <div class="title-wrapper">
+            <h2 class="section-title">Quick Project Estimator</h2>
+        </div>
+        <div class="calc-box">
+            <div class="form-group">
+                <label for="serviceType">Select Primary Service:</label>
+                <select id="serviceType" onchange="calculateEstimate()">
+                    <option value="1200">Exterior Facade Painting</option>
+                    <option value="450">Railings & Gate Metalwork Restoration</option>
+                    <option value="1650">Full Exterior Package (House + Railings)</option>
+                    <option value="350">LVT Flooring Installation (Labour/Day)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="prepLevel">Preparation Intensity:</label>
+                <select id="prepLevel" onchange="calculateEstimate()">
+                    <option value="1">Standard Prep (Minor Touch-ups)</option>
+                    <option value="1.2">Heavy Prep (Scraping, Rust Treatment, Filling)</option>
+                </select>
+            </div>
+            <div class="result-box" id="estimateResult">
+                Estimated Labour Cost: £1,440 - £1,650
+            </div>
+            <p style="text-align: center; font-size: 0.85rem; color: #888; margin-top: 10px;">
+                *Estimates are indicative labor-only rates for London properties.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact">
+        <h3>The Remis Touch</h3>
+        <p>Premium Decorating & Property Maintenance | London & Surrounding Areas</p>
+        <p style="margin: 15px 0;">
+            <strong>Phone:</strong> <a href="tel:+447539371010">+44 (0) 7539 371 010</a><br>
+            <strong>Email:</strong> <a href="mailto:theremistouch@gmail.com">theremistouch@gmail.com</a>
+        </p>
+        <p style="font-size: 0.8rem; color: #555;">&copy; 2026 The Remis Touch. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function calculateEstimate() {
+            const basePrice = parseFloat(document.getElementById('serviceType').value);
+            const prepMultiplier = parseFloat(document.getElementById('prepLevel').value);
+            
+            const total = Math.round(basePrice * prepMultiplier);
+            const lowRange = Math.round(total * 0.95);
+            const highRange = Math.round(total * 1.05);
+
+            document.getElementById('estimateResult').innerText = 
+                `Estimated Labour Cost: £${lowRange} - £${highRange}`;
+        }
+    </script>
+</body>
+</html>
