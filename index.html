@@ -1,166 +1,380 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Remis Touch | Premium Painting, Joinery & Property Maintenance London</title>
+    <title>The Remis Touch | Luxury Finishes & Premium Property Services</title>
+    <!-- Google Fonts for High-End Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
+            --bg-dark: #0b0f19;
+            --card-bg: rgba(22, 28, 45, 0.7);
             --gold: #d4af37;
-            --dark-gold: #b38f4d;
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-            --text-light: #f5f5f5;
-            --text-muted: #a0a0a0;
+            --gold-hover: #f3e5ab;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: rgba(212, 175, 55, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-        /* Navigation */
-        header { background: rgba(18, 18, 18, 0.95); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        .logo span { color: #fff; }
-        .nav-links a { color: var(--text-light); text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .phone-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .phone-link:hover {
+            color: var(--gold);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            color: #000;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+        }
 
         /* Hero Section */
-        .hero { height: 90vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=80') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; margin-top: 60px; }
-        .hero-content { max-width: 800px; }
-        .hero h1 { font-size: 3rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
-        .hero h1 span { color: var(--gold); }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; }
-        .btn { display: inline-block; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 700; text-transform: uppercase; transition: 0.3s; border: none; cursor: pointer; }
-        .btn:hover { background: var(--dark-gold); color: #fff; }
+        .hero {
+            padding: 8rem 8% 6rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-        /* Services Section */
-        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 40px; text-transform: uppercase; border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 10px; }
-        .title-wrapper { text-align: center; }
-        
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .service-card { background: var(--card-bg); border: 1px solid #333; border-radius: 8px; padding: 30px; transition: 0.3s; }
-        .service-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .service-card h3 { color: var(--gold); font-size: 1.4rem; margin-bottom: 15px; }
+        .hero-subtitle {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
 
-        /* Interactive Estimate Calculator */
-        .calc-box { background: var(--card-bg); border: 1px solid var(--gold); padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group select, .form-group input { width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 4px; }
-        .result-box { text-align: center; margin-top: 20px; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Services Grid */
+        .services {
+            padding: 5rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .section-header .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 1rem auto 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 3rem 2.5rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.8;
+        }
+
+        /* Portfolio Gallery */
+        .gallery {
+            padding: 5rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 320px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(11, 15, 25, 0.95));
+        }
+
+        .portfolio-overlay span {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
 
         /* Footer / Contact */
-        footer { background: #0a0a0a; border-top: 1px solid #222; padding: 40px 20px; text-align: center; color: var(--text-muted); }
-        footer h3 { color: var(--gold); margin-bottom: 15px; }
-        footer a { color: var(--text-light); text-decoration: none; }
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 6rem 8% 4rem;
+            text-align: center;
+            background: #070a12;
+        }
+
+        footer h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-details a {
+            font-size: 1.3rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--gold-hover);
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            color: #4b5563;
+            font-size: 0.85rem;
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; }
+            .hero h1 { font-size: 2.4rem; }
+            header { padding: 1.5rem 5%; flex-direction: column; gap: 1rem; }
+            .header-contact { flex-direction: column; gap: 0.5rem; }
+            .services, .gallery { padding: 3rem 5%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="nav-container">
-            <div class="logo">The Remis <span>Touch</span></div>
-            <nav class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#calculator">Estimate Tool</a>
-                <a href="#contact">Contact</a>
-            </nav>
+        <div class="brand-title">The Remis Touch</div>
+        <div class="header-contact">
+            <!-- Replace 07123456789 below with your actual phone number -->
+            <a href="tel:07123456789" class="phone-link">📞 07123 456789</a>
+            <a href="mailto:info@theremistouch.co.uk" class="btn-gold">Enquire Now</a>
         </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Craftsmanship in <span>Every Detail</span></h1>
-            <p>London's Specialist in LVT Joinery, Premium Painting, and Railing Restoration.</p>
-            <a href="tel:+447539371010" class="btn">Call Now: 07539 371 010</a>
+        <div class="hero-subtitle">Bespoke Property Enhancement</div>
+        <h1>Uncompromised Quality & Perfection in Every Detail</h1>
+        <p>Delivering high-end interior painting, precision LVT floor fitting, and premier handyman services across fine residential and commercial spaces.</p>
+        <a href="mailto:info@theremistouch.co.uk" class="btn-gold">Request a Consultation</a>
+    </section>
+
+    <section class="services">
+        <div class="section-header">
+            <h2>Our Specialist Services</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <span class="card-number">01</span>
+                <h3>Premium Painting & Decorating</h3>
+                <p>Meticulous surface preparation combined with luxury paint finishes. We specialize in flawless interior walls, refined woodwork, and durable exterior coatings designed for high-end properties.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-number">02</span>
+                <h3>Precision LVT Flooring</h3>
+                <p>Expert installation of Luxury Vinyl Tile flooring. Complete subfloor preparation, leveling, and seamless fitting to create clean, elegant, and resilient architectural floors.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-number">03</span>
+                <h3>Bespoke Handyman Services</h3>
+                <p>Tailored property maintenance, custom fixtures fitting, precision repairs, and high-spec odd jobs executed with extraordinary care and attention to detail.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="section">
-        <div class="title-wrapper">
-            <h2 class="section-title">Our Services</h2>
+    <section class="gallery">
+        <div class="section-header">
+            <h2>Selected Portfolio</h2>
+            <div class="divider"></div>
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Exterior & Interior Painting</h3>
-                <p>Full substrate preparation, chemical washing, crack repairs, and top-tier painting for residential facades and indoor spaces.</p>
+
+        <div class="image-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Luxury Painting">
+                <div class="portfolio-overlay"><span>Interior Decorating</span></div>
             </div>
-            <div class="service-card">
-                <h3>Metal Railings & Gates Restoration</h3>
-                <p>Intensive hand-scraping, wire-brushing, rust stabilization, and anti-corrosive gloss application for long-lasting weather protection.</p>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80" alt="LVT Flooring">
+                <div class="portfolio-overlay"><span>LVT Floor Fitting</span></div>
             </div>
-            <div class="service-card">
-                <h3>LVT & Joinery Services</h3>
-                <p>Precision installation of LVT flooring, wood repairs, window sill restoration, and bespoke property maintenance solutions.</p>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Property Repair">
+                <div class="portfolio-overlay"><span>Property Maintenance</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Estimate Calculator -->
-    <section id="calculator" class="section">
-        <div class="title-wrapper">
-            <h2 class="section-title">Quick Project Estimator</h2>
+    <footer>
+        <h2>Begin Your Project</h2>
+        <p>Contact us directly to discuss your requirements or schedule an on-site visit.</p>
+        <div class="contact-details">
+            <a href="mailto:info@theremistouch.co.uk">✉️ info@theremistouch.co.uk</a>
+            <!-- Replace 07123456789 below with your actual phone number -->
+            <a href="tel:07539 371010">📞 07539 371010</a>
         </div>
-        <div class="calc-box">
-            <div class="form-group">
-                <label for="serviceType">Select Primary Service:</label>
-                <select id="serviceType" onchange="calculateEstimate()">
-                    <option value="1200">Exterior Facade Painting</option>
-                    <option value="450">Railings & Gate Metalwork Restoration</option>
-                    <option value="1650">Full Exterior Package (House + Railings)</option>
-                    <option value="350">LVT Flooring Installation (Labour/Day)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="prepLevel">Preparation Intensity:</label>
-                <select id="prepLevel" onchange="calculateEstimate()">
-                    <option value="1">Standard Prep (Minor Touch-ups)</option>
-                    <option value="1.2">Heavy Prep (Scraping, Rust Treatment, Filling)</option>
-                </select>
-            </div>
-            <div class="result-box" id="estimateResult">
-                Estimated Labour Cost: £1,440 - £1,650
-            </div>
-            <p style="text-align: center; font-size: 0.85rem; color: #888; margin-top: 10px;">
-                *Estimates are indicative labor-only rates for London properties.
-            </p>
-        </div>
-    </section>
-
-    <!-- Contact & Footer -->
-    <footer id="contact">
-        <h3>The Remis Touch</h3>
-        <p>Premium Decorating & Property Maintenance | London & Surrounding Areas</p>
-        <p style="margin: 15px 0;">
-            <strong>Phone:</strong> <a href="tel:+447539371010">+44 (0) 7539 371 010</a><br>
-            <strong>Email:</strong> <a href="mailto:theremistouch@gmail.com">theremistouch@gmail.com</a>
-        </p>
-        <p style="font-size: 0.8rem; color: #555;">&copy; 2026 The Remis Touch. All Rights Reserved.</p>
+        <div class="copyright">&copy; 2026 The Remis Touch. All rights reserved.</div>
     </footer>
 
-    <script>
-        function calculateEstimate() {
-            const basePrice = parseFloat(document.getElementById('serviceType').value);
-            const prepMultiplier = parseFloat(document.getElementById('prepLevel').value);
-            
-            const total = Math.round(basePrice * prepMultiplier);
-            const lowRange = Math.round(total * 0.95);
-            const highRange = Math.round(total * 1.05);
-
-            document.getElementById('estimateResult').innerText = 
-                `Estimated Labour Cost: £${lowRange} - £${highRange}`;
-        }
-    </script>
 </body>
 </html>
-
