@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,45 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Remis Touch offers professional internal and external painting, precision LVT flooring installation, and property handyman services across London and Greater London.">
+    <meta name="author" content="Remis">
+    
+    <!-- Open Graph / Social Media Preview -->
+    <meta property="og:title" content="The Remis Touch | Professional Painting, LVT Flooring & Handyman Services">
+    <meta property="og:description" content="Uncompromised quality and perfection in every detail. Serving London & Greater London.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://theremistouch.co.uk">
+    <meta property="og:image" content="https://theremistouch.co.uk/images/20260729_123044.jpg">
+
     <title>The Remis Touch | Professional Painting, LVT Flooring & Handyman Services</title>
+    
+    <!-- Local Business Schema (JSON-LD for Google SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "The Remis Touch",
+      "image": "https://theremistouch.co.uk/images/20260729_123044.jpg",
+      "telephone": "+447539371010",
+      "email": "info@theremistouch.co.uk",
+      "url": "https://theremistouch.co.uk",
+      "priceRange": "££",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "London and Greater London"
+      },
+      "sameAs": [
+        "https://www.checkatrade.com/trades/theremistouch5945210"
+      ],
+      "knowsAbout": [
+        "Painting and Decorating",
+        "LVT Flooring Installation",
+        "Property Maintenance",
+        "Handyman Services"
+      ]
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +64,7 @@
             --gold: #d4af37;
             --gold-hover: #f3e5ab;
             --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text-muted: #a1a8b6;
             --border: rgba(212, 175, 55, 0.2);
         }
 
@@ -104,6 +141,7 @@
             display: inline-block;
             border: none;
             cursor: pointer;
+            text-align: center;
         }
 
         .btn-gold:hover {
@@ -217,7 +255,7 @@
         }
 
         /* Shared Layout */
-        .services, .pricing, .gallery, .reviews, .contact-section {
+        .about-section, .services, .pricing, .gallery, .reviews, .contact-section {
             padding: 4rem 8%;
             max-width: 1400px;
             margin: 0 auto;
@@ -242,6 +280,52 @@
             margin: 1rem auto 0;
         }
 
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 8px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .feature-item span {
+            color: var(--gold);
+        }
+
+        /* Grid Layouts */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -349,6 +433,9 @@
             height: 320px;
             background: rgba(22, 28, 45, 0.9);
             cursor: pointer;
+            padding: 0;
+            text-align: left;
+            width: 100%;
         }
 
         .portfolio-item img {
@@ -358,7 +445,7 @@
             transition: transform 0.5s ease;
         }
 
-        .portfolio-item:hover img {
+        .portfolio-item:hover img, .portfolio-item:focus img {
             transform: scale(1.08);
         }
 
@@ -417,6 +504,8 @@
             font-size: 2.5rem;
             font-weight: bold;
             cursor: pointer;
+            background: none;
+            border: none;
         }
 
         /* Reviews Cards */
@@ -497,6 +586,32 @@
             border-color: var(--gold);
         }
 
+        /* Hidden Honeypot */
+        .gotcha-field {
+            display: none !important;
+        }
+
+        #form-status {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        #form-status.success {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid #25d366;
+            color: #25d366;
+        }
+
+        #form-status.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
         /* Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
@@ -563,7 +678,7 @@
 
         .copyright {
             margin-top: 3rem;
-            color: #4b5563;
+            color: #6b7280;
             font-size: 0.85rem;
         }
 
@@ -571,10 +686,11 @@
             .hero h1 { font-size: 2.4rem; }
             header { padding: 1.5rem 5%; flex-direction: column; text-align: center; }
             .header-contact { justify-content: center; width: 100%; }
-            .services, .pricing, .gallery, .reviews, .contact-section { padding: 3rem 5%; }
+            .about-section, .services, .pricing, .gallery, .reviews, .contact-section { padding: 3rem 5%; }
             .contact-container { padding: 1.5rem; }
             .whatsapp-float span { display: none; }
             .whatsapp-float { padding: 15px; border-radius: 50%; }
+            .features-list { flex-direction: column; gap: 0.8rem; }
         }
     </style>
 </head>
@@ -621,13 +737,26 @@
 
     <!-- Trust Badges Banner -->
     <div class="trust-banner">
-        <a href="https://maps.google.com/?q=The+Remis+Touch" target="_blank" class="trust-badge">
+        <a href="https://maps.google.com/?q=The+Remis+Touch" target="_blank" rel="noopener noreferrer" class="trust-badge">
             <span class="badge-icon">⭐</span> Google Verified Business (5.0 ★)
         </a>
-        <a href="https://www.checkatrade.com/trades/theremistouch5945210" target="_blank" class="trust-badge">
+        <a href="https://www.checkatrade.com/trades/theremistouch5945210" target="_blank" rel="noopener noreferrer" class="trust-badge">
             <span class="badge-icon">🛡️</span> Checkatrade Vetted & Approved
         </a>
     </div>
+
+    <!-- Personal Guarantee / About Section -->
+    <section class="about-section">
+        <div class="about-card">
+            <h3>Craftsmanship Built on Trust</h3>
+            <p>At <strong>The Remis Touch</strong>, every project is handled with meticulous attention to detail. Whether it is transforming a space with flawless paintwork, laying precision luxury vinyl tile, or carrying out essential property maintenance, the standard remains identical: exceptional quality, zero shortcuts, and a clean workspace left behind.</p>
+            <div class="features-list">
+                <div class="feature-item"><span>✓</span> Fully Vetted & Insured</div>
+                <div class="feature-item"><span>✓</span> Clear Upfront Pricing</div>
+                <div class="feature-item"><span>✓</span> Reliable & Punctual</div>
+            </div>
+        </div>
+    </section>
 
     <!-- Services Section -->
     <section class="services">
@@ -667,10 +796,10 @@
         <div class="grid">
             <div class="price-card">
                 <h3>Handyman Services</h3>
-                <div class="price-tag">£50 <span>/ hour</span></div>
+                <div class="price-tag"><span>From </span>£50 <span>/ hour</span></div>
                 <ul class="price-list">
                     <li>✓ Minimum 2-hour call-out</li>
-                    <li>✓ £300 Full Day Rate (8 hrs)</li>
+                    <li>✓ Day rate options available</li>
                     <li>✓ Fixtures, repairs & assembly</li>
                     <li>✓ Clean & punctual service</li>
                 </ul>
@@ -678,22 +807,22 @@
 
             <div class="price-card">
                 <h3>LVT Floor Installation</h3>
-                <div class="price-tag">£25 <span>/ m²</span></div>
+                <div class="price-tag"><span>From </span>£25 <span>/ m²</span></div>
                 <ul class="price-list">
-                    <li>✓ Straight plank from £25/m²</li>
+                    <li>✓ Straight plank installation</li>
                     <li>✓ Subfloor ply & screed prep</li>
-                    <li>✓ Door trimming & neat expansion cuts</li>
-                    <li>✓ Precision finish</li>
+                    <li>✓ Door trimming & expansion cuts</li>
+                    <li>✓ Precision detailed finish</li>
                 </ul>
             </div>
 
             <div class="price-card">
                 <h3>Painting & Decorating</h3>
-                <div class="price-tag">£300 <span>/ day</span></div>
+                <div class="price-tag"><span>From </sphtml £250 <span>/ day</span></div>
                 <ul class="price-list">
-                    <li>✓ £300 Standard Day Rate</li>
+                    <li>✓ Standard Day Rate options</li>
                     <li>✓ Fixed room rates available</li>
-                    <li>✓ Full surface sanding & filling</li>
+                    <li>✓ Surface sanding & filling</li>
                     <li>✓ Internal & external projects</li>
                 </ul>
             </div>
@@ -704,48 +833,120 @@
     <!-- Gallery Section -->
     <section class="gallery">
         <div class="section-header">
-            <h2>Our Recent Projects</h2>
+            <h2>Recent Projects & Work</h2>
             <div class="divider"></div>
         </div>
 
         <div class="image-grid">
-            <div class="portfolio-item" onclick="openLightbox('images/20260729_123044.jpg')">
-                <img src="images/20260729_123044.jpg" alt="Kitchen Decorating Project">
-                <div class="portfolio-overlay">
-                    <span>Kitchen cabinet painting</span>
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260729_123044.jpg', 'Kitchen Cabinet Painting')">
+                <img src="images/20260729_123044.jpg" alt="Kitchen Cabinet Painting">
+                <span class="portfolio-overlay">
+                    <span>Kitchen Cabinet Painting</span>
                     <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </div>
-            </div>
+                </span>
+            </button>
 
-            <div class="portfolio-item" onclick="openLightbox('images/20260723_170716.jpg')">
-                <img src="images/20260723_170716.jpg" alt="Interior Painting Finish">
-                <div class="portfolio-overlay">
-                    <span>exterior painting</span>
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260723_170716.jpg', 'Exterior Painting Finish')">
+                <img src="images/20260723_170716.jpg" alt="Exterior Painting Finish">
+                <span class="portfolio-overlay">
+                    <span>Exterior Painting</span>
                     <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </div>
-            </div>
+                </span>
+            </button>
 
-            <div class="portfolio-item" onclick="openLightbox('images/20260623_133920.jpg')">
-                <img src="images/20260623_133920.jpg" alt="Decorating Finish">
-                <div class="portfolio-overlay">
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260623_133920.jpg', 'Precision Decorating')">
+                <img src="images/20260623_133920.jpg" alt="Precision Decorating">
+                <span class="portfolio-overlay">
                     <span>Precision Decorating</span>
                     <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </div>
-            </div>
+                </span>
+            </button>
 
-            <div class="portfolio-item" onclick="openLightbox('images/20260309_144840(1).jpg')">
-                <img src="images/20260309_144840(1).jpg" alt="Recent Trade Work" onerror="this.src='images/20260309_144840(1).jpeg'">
-                <div class="portfolio-overlay">
-                    <span>interior painting </span>
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260309_144840(1).jpg', 'Interior Painting Work')">
+                <img src="images/20260309_144840(1).jpg" alt="Interior Painting Work">
+                <span class="portfolio-overlay">
+                    <span>Interior Painting</span>
                     <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </div>
-            </div>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_053409.jpg', 'LVT Floor Preparation')">
+                <img src="images/20260713_053409.jpg" alt="LVT Floor Preparation">
+                <span class="portfolio-overlay">
+                    <span>LVT Preparation</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_053644.jpg', 'Precision Flooring Installation')">
+                <img src="images/20260713_053644.jpg" alt="Precision Flooring Installation">
+                <span class="portfolio-overlay">
+                    <span>Precision Flooring</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_054100.jpg', 'Luxury Vinyl Fitting')">
+                <img src="images/20260713_054100.jpg" alt="Luxury Vinyl Fitting">
+                <span class="portfolio-overlay">
+                    <span>Luxury Vinyl Fitting</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163537.jpg', 'Interior Finishing')">
+                <img src="images/20260731_163537.jpg" alt="Interior Finishing">
+                <span class="portfolio-overlay">
+                    <span>Interior Finishing</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163734.jpg', 'Detailed Woodwork Decorating')">
+                <img src="images/20260731_163734.jpg" alt="Detailed Woodwork Decorating">
+                <span class="portfolio-overlay">
+                    <span>Woodwork Decorating</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163834.jpg', 'Property Maintenance & Repair')">
+                <img src="images/20260731_163834.jpg" alt="Property Maintenance & Repair">
+                <span class="portfolio-overlay">
+                    <span>Property Maintenance</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163955.jpg', 'Custom Fixtures Installation')">
+                <img src="images/20260731_163955.jpg" alt="Custom Fixtures Installation">
+                <span class="portfolio-overlay">
+                    <span>Custom Fixtures</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_164141.jpg', 'High-Finish Wall Coating')">
+                <img src="images/20260731_164141.jpg" alt="High-Finish Wall Coating">
+                <span class="portfolio-overlay">
+                    <span>High-Finish Wall Coating</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
+
+            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_164310.jpg', 'Handyman & Assembly Work')">
+                <img src="images/20260731_164310.jpg" alt="Handyman & Assembly Work">
+                <span class="portfolio-overlay">
+                    <span>Handyman & Assembly</span>
+                    <span class="zoom-icon">🔍 Tap to enlarge</span>
+                </span>
+            </button>
         </div>
     </section>
 
     <!-- Full-Screen Lightbox Popup -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
+        <button type="button" class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <img id="lightbox-img" src="" alt="Enlarged Project View">
     </div>
 
@@ -785,22 +986,25 @@
         </div>
 
         <div class="contact-container">
-            <form action="https://formspree.io/f/info@theremistouch.co.uk" method="POST">
+            <form id="contact-form" action="https://formspree.io/f/info@theremistouch.co.uk" method="POST">
+                <!-- Spam Honeypot -->
+                <input type="text" name="_gotcha" class="gotcha-field" tabindex="-1" autocomplete="off">
+
                 <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" name="name" placeholder="John Smith" required>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Smith" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" placeholder="07123 456789" required>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="07123 456789" required>
                 </div>
                 <div class="form-group">
-                    <label>Postcode / Area</label>
-                    <input type="text" name="location" placeholder="e.g. SE1, Bromley, London" required>
+                    <label for="location">Postcode / Area</label>
+                    <input type="text" id="location" name="location" placeholder="e.g. SE1, Bromley, London" required>
                 </div>
                 <div class="form-group">
-                    <label>Service Required</label>
-                    <select name="service">
+                    <label for="service">Service Required</label>
+                    <select id="service" name="service">
                         <option value="Painting">Painting & Decorating</option>
                         <option value="LVT Flooring">LVT Flooring</option>
                         <option value="Handyman">Handyman & Repairs</option>
@@ -808,16 +1012,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Job Description</label>
-                    <textarea name="message" rows="4" placeholder="Tell us briefly about your project..." required></textarea>
+                    <label for="message">Job Description</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us briefly about your project..." required></textarea>
                 </div>
-                <button type="submit" class="btn-gold" style="width: 100%;">Send Request</button>
+                <button type="submit" id="submit-btn" class="btn-gold" style="width: 100%;">Send Request</button>
+                <div id="form-status"></div>
             </form>
         </div>
     </section>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/447539371010?text=Hello%20Remis,%20I'd%20like%20to%20enquire%20about%20your%20services." target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/447539371010?text=Hello%20Remis,%20I'd%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float">
         💬 <span>Chat on WhatsApp</span>
     </a>
 
@@ -833,15 +1038,63 @@
     </footer>
 
     <script>
-        function openLightbox(imageSrc) {
-            document.getElementById('lightbox-img').src = imageSrc;
+        function openLightbox(imageSrc, altText) {
+            const img = document.getElementById('lightbox-img');
+            img.src = imageSrc;
+            img.alt = altText || 'Enlarged view';
             document.getElementById('lightbox').style.display = 'flex';
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
+
+        // Close lightbox when hitting Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // AJAX Form Submission for Formspree
+        const form = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Sending...';
+
+            const data = new FormData(form);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.className = 'success';
+                    formStatus.innerText = 'Thank you! Your quote request has been sent successfully.';
+                    formStatus.style.display = 'block';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed.');
+                }
+            } catch (error) {
+                formStatus.className = 'error';
+                formStatus.innerText = 'Oops! There was a problem sending your request. Please call us directly.';
+                formStatus.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Send Request';
+            }
+        });
     </script>
 
 </body>
 </html>
+
