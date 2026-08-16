@@ -1,36 +1,36 @@
+from pathlib import Path
+import re
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Google Analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7EL6GK33CX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+src = Path("/mnt/data/index_x5f_improved (2).html")
+html = src.read_text(encoding="utf-8")
 
-      gtag('config', 'G-7EL6GK33CX');
-    </script>
+# 1) Tighten SEO title/description.
+html = html.replace(
+    "<title>Painter & Decorator London NW10 | The Remis Touch | 07539 371010 | All Painting Work</title>",
+    "<title>Painter & Decorator London NW10 | The Remis Touch</title>"
+)
+html = html.replace(
+    '<meta name="description" content="The Remis Touch - 5.0★ Rated Painter & Decorator in NW10 London. All Painting Work: Interior, Exterior, Fences, Railings, Residential & Commercial. Free Quotes - Call 07539 371010.">',
+    '<meta name="description" content="The Remis Touch is a local painter and decorator covering London NW10 and surrounding areas. Interior, exterior, fences and railings. Free quotes. Call 07539 371010.">'
+)
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Remis Touch offers professional internal and external painting, precision LVT flooring installation, and property handyman services across London and Greater London.">
-    <meta name="author" content="Remis">
-    
-    <!-- Open Graph / Social Media Preview -->
-    <meta property="og:title" content="The Remis Touch | Professional Painting, LVT Flooring & Handyman Services">
-    <meta property="og:description" content="Uncompromised quality and perfection in every detail. Serving London & Greater London.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://theremistouch.co.uk">
-    <meta property="og:image" content="https://theremistouch.co.uk/images/20260729_123044.jpg">
+# 2) Improve OG wording.
+html = html.replace(
+    '<meta property="og:title" content="The Remis Touch | 5.0★ Painter & Decorator in London NW10">',
+    '<meta property="og:title" content="The Remis Touch | Painter & Decorator London NW10">'
+)
+html = html.replace(
+    '<meta property="og:description" content="All Painting Work - Interior & Exterior - Fences, Railings - 15 x 5★ Reviews - Free Quotes 07539 371010">',
+    '<meta property="og:description" content="Professional interior and exterior painting, fences and railings across London NW10 and surrounding areas. Free quotes.">'
+)
 
-    <title>The Remis Touch | Professional Painting, LVT Flooring & Handyman Services</title>
-
-    <!-- Bark Widget Script -->
-    <script type='text/javascript' src='https://www.bark.com/assets/js/frontend-v2/widgets-v2.85f38926d145b2a16180d4a1696e3d10.v2.js' defer></script>
-
-    <!-- Local Business Schema (JSON-LD for Google SEO) -->
-    <script type="application/ld+json">
+# 3) Replace the business schema with cleaner, more conservative local-business schema.
+schema_old = re.search(
+    r'    <script type="application/ld\+json">\s*\{\s*"@context": "https://schema\.org",.*?\n    \}\s*\n    </script>',
+    html,
+    flags=re.S
+)
+schema_new = '''    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HomeAndConstructionBusiness",
@@ -40,1069 +40,118 @@
       "email": "info@theremistouch.co.uk",
       "url": "https://theremistouch.co.uk",
       "priceRange": "££",
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "London and Greater London"
-      },
+      "areaServed": [
+        {"@type": "Place", "name": "NW10"},
+        {"@type": "Place", "name": "Willesden"},
+        {"@type": "Place", "name": "Harlesden"},
+        {"@type": "Place", "name": "Wembley"},
+        {"@type": "Place", "name": "Kilburn"},
+        {"@type": "Place", "name": "Brondesbury"},
+        {"@type": "Place", "name": "Cricklewood"},
+        {"@type": "Place", "name": "Kensal Green"},
+        {"@type": "City", "name": "London"}
+      ],
       "sameAs": [
         "https://www.checkatrade.com/trades/theremistouch5945210",
         "https://www.bark.com/en/gb/company/the-remis-touch-/GR1jwL/"
-      ],
-      "knowsAbout": [
-        "Painting and Decorating",
-        "LVT Flooring Installation",
-        "Property Maintenance",
-        "Handyman Services"
       ]
     }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0b0f19;
-            --card-bg: rgba(22, 28, 45, 0.7);
-            --gold: #d4af37;
-            --gold-hover: #f3e5ab;
-            --text-main: #f3f4f6;
-            --text-muted: #a1a8b6;
-            --border: rgba(212, 175, 55, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* Header Navigation */
-        header {
-            padding: 1.2rem 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .brand-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--gold);
-            text-transform: uppercase;
-        }
-
-        .header-contact {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .phone-link {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .phone-link:hover {
-            color: var(--gold);
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
-            color: #000;
-            text-decoration: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 5rem 8% 3rem;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .hero-subtitle {
-            color: var(--gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1.2rem;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.2rem;
-            font-weight: 400;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            font-weight: 300;
-        }
-
-        .location-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--border);
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .brand-details-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1.5rem 2rem;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .brand-details-card .phone {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.3rem;
-            letter-spacing: 1px;
-        }
-
-        .brand-details-card .domain {
-            font-size: 1rem;
-            color: var(--gold);
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        /* Trust Badges Banner */
-        .trust-banner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-            padding: 1.5rem 5%;
-            background: rgba(22, 28, 45, 0.4);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 4rem;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .trust-badge:hover {
-            color: var(--gold);
-        }
-
-        .badge-icon {
-            font-size: 1.2rem;
-        }
-
-        /* Shared Layout */
-        .about-section, .services, .pricing, .gallery, .reviews, .contact-section {
-            padding: 4rem 8%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            color: var(--text-main);
-            letter-spacing: 1px;
-        }
-
-        .section-header .divider {
-            width: 60px;
-            height: 2px;
-            background: var(--gold);
-            margin: 1rem auto 0;
-        }
-
-        /* About Section */
-        .about-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 3rem;
-            border-radius: 8px;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .about-card p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .features-list {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        .feature-item span {
-            color: var(--gold);
-        }
-
-        /* Grid Layouts */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 3rem 2.5rem;
-            border-radius: 8px;
-            transition: all 0.4s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-number {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.98rem;
-            line-height: 1.8;
-        }
-
-        /* Pricing Section */
-        .price-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .price-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
-
-        .price-tag {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gold);
-            margin: 1rem 0;
-            font-family: 'Cinzel', serif;
-        }
-
-        .price-tag span {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 400;
-        }
-
-        .price-list {
-            list-style: none;
-            color: var(--text-muted);
-            text-align: left;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .price-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .disclaimer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 2rem;
-            font-style: italic;
-        }
-
-        /* Portfolio Gallery */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            height: 320px;
-            background: rgba(22, 28, 45, 0.9);
-            cursor: pointer;
-            padding: 0;
-            text-align: left;
-            width: 100%;
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .portfolio-item:hover img, .portfolio-item:focus img {
-            transform: scale(1.08);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.2rem;
-            background: linear-gradient(transparent, rgba(11, 15, 25, 0.95));
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .portfolio-overlay span {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 0.95rem;
-        }
-
-        .zoom-icon {
-            color: var(--text-main);
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* Lightbox Popup */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 85vh;
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            color: var(--gold);
-            font-size: 2.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        /* Reviews Cards */
-        .review-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .stars {
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .review-source {
-            font-size: 0.8rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .review-text {
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .reviewer-name {
-            font-family: 'Cinzel', serif;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        /* Contact Form */
-        .contact-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 3rem;
-            border-radius: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--gold);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 0.9rem;
-            background: rgba(11, 15, 25, 0.8);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text-main);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-color: var(--gold);
-        }
-
-        /* Hidden Honeypot */
-        .gotcha-field {
-            display: none !important;
-        }
-
-        #form-status {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        #form-status.success {
-            background: rgba(37, 211, 102, 0.2);
-            border: 1px solid #25d366;
-            color: #25d366;
-        }
-
-        #form-status.error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 5rem 8% 3rem;
-            text-align: center;
-            background: #070a12;
-        }
-
-        footer h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        footer p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-details a {
-            font-size: 1.2rem;
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        .contact-details a:hover {
-            color: var(--gold-hover);
-        }
-
-        .copyright {
-            margin-top: 3rem;
-            color: #6b7280;
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.4rem; }
-            header { padding: 1.5rem 5%; flex-direction: column; text-align: center; }
-            .header-contact { justify-content: center; width: 100%; }
-            .about-section, .services, .pricing, .gallery, .reviews, .contact-section { padding: 3rem 5%; }
-            .contact-container { padding: 1.5rem; }
-            .whatsapp-float span { display: none; }
-            .whatsapp-float { padding: 15px; border-radius: 50%; }
-            .features-list { flex-direction: column; gap: 0.8rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="brand-title">The Remis Touch</div>
-        <div class="header-contact">
-            <!-- Header Checkatrade Widget -->
-            <div class="checkatrade-header-badge">
-                <script>
-                window._checkatradeConfig = {
-                  companyId: "9734270",
-                  uniqueName: "theremistouch5945210",
-                  theme: "red",
-                };
-                </script>
-                <script src="https://www.checkatrade.com/static/js/widget.js"></script>
-            </div>
-            
-            <a href="tel:+447539371010" class="phone-link">📞 07539 371010</a>
-            <a href="#contact" class="btn-gold">Get Free Quote</a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-subtitle">LVT Flooring • Painting • Handyman Specialist</div>
-        <h1>Uncompromised Quality & Perfection in Every Detail</h1>
-        <p>Delivering high-quality internal and external painting, precision LVT floor fitting, and professional handyman services across all residential and commercial properties.</p>
-        
-        <div class="location-tag">
-            📍 Serving London, Greater London & Surrounding Areas
-        </div>
-        <br>
-        <div class="brand-details-card">
-            <div class="phone">📞 +44 (0) 7539 371 010</div>
-            <div class="domain">🌐 theremistouch.co.uk</div>
-        </div>
-
-        <div>
-            <a href="#contact" class="btn-gold">Request a Free Estimate</a>
-        </div>
-    </section>
-
-    <!-- Trust Badges Banner -->
-    <div class="trust-banner">
-        <a href="https://maps.google.com/?q=The+Remis+Touch" target="_blank" rel="noopener noreferrer" class="trust-badge">
-            <span class="badge-icon">⭐</span> Google Verified Business (5.0 ★)
-        </a>
-        <a href="https://www.checkatrade.com/trades/theremistouch5945210" target="_blank" rel="noopener noreferrer" class="trust-badge">
-            <span class="badge-icon">🛡️</span> Checkatrade Vetted & Approved
-        </a>
-        <!-- Bark Widget -->
-        <div class="trust-badge">
-            <a href='https://www.bark.com/en/gb/company/the-remis-touch-/GR1jwL/' target='_blank' rel='noopener noreferrer' class='bark-widget' data-type='pro' data-id='GR1jwL' data-image='medium-navy' data-version='3.0'>The Remis Touch</a>
-        </div>
-    </div>
-
-    <!-- Personal Guarantee / About Section -->
-    <section class="about-section">
-        <div class="about-card">
-            <h3>Craftsmanship Built on Trust</h3>
-            <p>At <strong>The Remis Touch</strong>, every project is handled with meticulous attention to detail. Whether it is transforming a space with flawless paintwork, laying precision luxury vinyl tile, or carrying out essential property maintenance, the standard remains identical: exceptional quality, zero shortcuts, and a clean workspace left behind.</p>
-            <div class="features-list">
-                <div class="feature-item"><span>✓</span> Fully Vetted & Insured</div>
-                <div class="feature-item"><span>✓</span> Clear Upfront Pricing</div>
-                <div class="feature-item"><span>✓</span> Reliable & Punctual</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
-        <div class="section-header">
-            <h2>Our Specialist Services</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <span class="card-number">01</span>
-                <h3>Painting & Decorating</h3>
-                <p>Meticulous surface preparation combined with flawless finishes. We cater to all homes and commercial spaces—specialising in internal walls, woodwork, and durable external painting built to last.</p>
-            </div>
-
-            <div class="card">
-                <span class="card-number">02</span>
-                <h3>Precision LVT Flooring</h3>
-                <p>Expert installation of Luxury Vinyl Tile flooring. Complete subfloor preparation, ply lining, self-levelling screed, and seamless straight plank fitting.</p>
-            </div>
-
-            <div class="card">
-                <span class="card-number">03</span>
-                <h3>Handyman & Property Repairs</h3>
-                <p>Tailored property maintenance, custom fixtures fitting, precision repairs, TV mounting, and general odd jobs executed with extraordinary care and attention to detail.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section (Placing Project Pictures BEFORE Pricing) -->
-    <section class="gallery">
-        <div class="section-header">
-            <h2>Recent Projects & Work</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="image-grid">
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260729_123044.jpg', 'Kitchen Cabinet Painting')">
-                <img src="images/20260729_123044.jpg" alt="Kitchen Cabinet Painting">
-                <span class="portfolio-overlay">
-                    <span>Kitchen Cabinet Painting</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260723_170716.jpg', 'Exterior Painting Finish')">
-                <img src="images/20260723_170716.jpg" alt="Exterior Painting Finish">
-                <span class="portfolio-overlay">
-                    <span>Exterior Painting</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260623_133920.jpg', 'Precision Decorating')">
-                <img src="images/20260623_133920.jpg" alt="Precision Decorating">
-                <span class="portfolio-overlay">
-                    <span>Full exterior transformation</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260309_144840(1).jpg', 'Interior Painting Work')">
-                <img src="images/20260309_144840(1).jpg" alt="Interior Painting Work">
-                <span class="portfolio-overlay">
-                    <span>Interior full refreshing </span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_053409.jpg', 'LVT Floor Preparation')">
-                <img src="images/20260713_053409.jpg" alt="LVT Floor Preparation">
-                <span class="portfolio-overlay">
-                    <span>Wall repairs and precision cuts</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_053644.jpg', 'Precision Flooring Installation')">
-                <img src="images/20260713_053644.jpg" alt="Precision Flooring Installation">
-                <span class="portfolio-overlay">
-                    <span>Immaculate wall finnish</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260713_054100.jpg', 'Luxury Vinyl Fitting')">
-                <img src="images/20260713_054100.jpg" alt="Luxury Vinyl Fitting">
-                <span class="portfolio-overlay">
-                    <span>Water damage repairs </span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163537.jpg', 'Interior Finishing')">
-                <img src="images/20260731_163537.jpg" alt="Interior Finishing">
-                <span class="portfolio-overlay">
-                    <span>Garden fence installation</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163734.jpg', 'Detailed Woodwork Decorating')">
-                <img src="images/20260731_163734.jpg" alt="Detailed Woodwork Decorating">
-                <span class="portfolio-overlay">
-                    <span>Lvt floor installation</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163834.jpg', 'Property Maintenance & Repair')">
-                <img src="images/20260731_163834.jpg" alt="Property Maintenance & Repair">
-                <span class="portfolio-overlay">
-                    <span>Lvt floor replacement</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_163955.jpg', 'Custom Fixtures Installation')">
-                <img src="images/20260731_163955.jpg" alt="Custom Fixtures Installation">
-                <span class="portfolio-overlay">
-                    <span>Lvt floor installation and subfloor preparation</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_164141.jpg', 'High-Finish Wall Coating')">
-                <img src="images/20260731_164141.jpg" alt="High-Finish Wall Coating">
-                <span class="portfolio-overlay">
-                    <span>Damp wall repairs</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-
-            <button type="button" class="portfolio-item" onclick="openLightbox('images/20260731_164310.jpg', 'Handyman & Assembly Work')">
-                <img src="images/20260731_164310.jpg" alt="Handyman & Assembly Work">
-                <span class="portfolio-overlay">
-                    <span>Lvt floor installation and subfloor preparation</span>
-                    <span class="zoom-icon">🔍 Tap to enlarge</span>
-                </span>
-            </button>
-        </div>
-    </section>
-
-    <!-- Pricing Guide Section -->
-    <section class="pricing">
-        <div class="section-header">
-            <h2>Guide Rates & Pricing</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="grid">
-            <div class="price-card">
-                <h3>Handyman Services</h3>
-                <div class="price-tag"><span>From </span>£50 <span>/ hour</span></div>
-                <ul class="price-list">
-                    <li>✓ Minimum 2-hour call-out</li>
-                    <li>✓ Day rate options available</li>
-                    <li>✓ Fixtures, repairs & assembly</li>
-                    <li>✓ Clean & punctual service</li>
-                </ul>
-            </div>
-
-            <div class="price-card">
-                <h3>LVT Floor Installation</h3>
-                <div class="price-tag"><span>From </span>£25 <span>/ m²</span></div>
-                <ul class="price-list">
-                    <li>✓ Straight plank installation</li>
-                    <li>✓ Subfloor ply & screed prep</li>
-                    <li>✓ Door trimming & expansion cuts</li>
-                    <li>✓ Precision detailed finish</li>
-                </ul>
-            </div>
-
-            <div class="price-card">
-                <h3>Painting & Decorating</h3>
-                <div class="price-tag"><span>From </span>£250 <span>/ day</span></div>
-                <ul class="price-list">
-                    <li>✓ Standard Day Rate options</li>
-                    <li>✓ Fixed room rates available</li>
-                    <li>✓ Surface sanding & filling</li>
-                    <li>✓ Internal & external projects</li>
-                </ul>
-            </div>
-        </div>
-        <p class="disclaimer">*Guide rates exclude specialist materials, parking/congestion charges where applicable. Final quotes provided after a free site visit.</p>
-    </section>
-
-    <!-- Full-Screen Lightbox Popup -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <button type="button" class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <img id="lightbox-img" src="" alt="Enlarged Project View">
-    </div>
-
-    <!-- Reviews Section -->
-    <section class="reviews">
-        <div class="section-header">
-            <h2>Client Reviews</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="grid">
-            <div class="review-card">
-                <div>
-                    <div class="review-source">Google Verified Review</div>
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"Remis did an outstanding job painting our interior hallway and living room. Extremely professional, clean, and the finish is absolute perfection. Highly recommended!"</p>
-                </div>
-                <div class="reviewer-name">— David S.</div>
-            </div>
-
-            <div class="review-card">
-                <div>
-                    <div class="review-source">Checkatrade Review</div>
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"We had LVT flooring fitted throughout our ground floor. The precision and attention to detail were top-tier. Will definitely be hiring again for future work."</p>
-                </div>
-                <div class="reviewer-name">— Michael T.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Contact Form Section -->
-    <section class="contact-section" id="contact">
-        <div class="section-header">
-            <h2>Get a Free Quote</h2>
-            <div class="divider"></div>
-        </div>
-
-        <div class="contact-container">
-            <form id="contact-form" action="https://formspree.io/f/info@theremistouch.co.uk" method="POST">
-                <!-- Spam Honeypot -->
-                <input type="text" name="_gotcha" class="gotcha-field" tabindex="-1" autocomplete="off">
-
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Smith" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="07123 456789" required>
-                </div>
-                <div class="form-group">
-                    <label for="location">Postcode / Area</label>
-                    <input type="text" id="location" name="location" placeholder="e.g. SE1, Bromley, London" required>
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Required</label>
-                    <select id="service" name="service">
-                        <option value="Painting">Painting & Decorating</option>
-                        <option value="LVT Flooring">LVT Flooring</option>
-                        <option value="Handyman">Handyman & Repairs</option>
-                        <option value="Multiple">Multiple Services</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Job Description</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Tell us briefly about your project..." required></textarea>
-                </div>
-                <button type="submit" id="submit-btn" class="btn-gold" style="width: 100%;">Send Request</button>
-                <div id="form-status"></div>
+    </script>'''
+if schema_old:
+    html = html[:schema_old.start()] + schema_new + html[schema_old.end():]
+
+# 4) Make hero copy more customer-focused while retaining local SEO.
+html = html.replace(
+    '<div class="hero-subtitle">Painter & Decorator • NW10 • London • 5.0★ Rated (15 Reviews)</div>',
+    '<div class="hero-subtitle">Painter & Decorator • London NW10 • 5.0★ Rated (15 Genuine Reviews)</div>'
+)
+html = html.replace(
+    '<h1>Painter & Decorator in London<br><span>All Painting Work</span> - Interior, Exterior, Fences & Railings</h1>',
+    '<h1>Painter & Decorator in London NW10<br><span>Interior & Exterior Painting</span> Done Properly</h1>'
+)
+html = html.replace(
+    '<p>5.0★ rated local painter. No job too small. We prep properly, protect your property and leave a flawless finish. Clean, reliable, fully insured. Free quotes in 24h.</p>',
+    '<p>Professional painting and decorating for homes and businesses. Careful preparation, clean workmanship and a quality finish — with clear quotes and reliable service from start to finish.</p>'
+)
+
+# 5) Avoid potentially unverifiable "Google Verified" wording in visible copy.
+html = html.replace('<span>Google Verified</span>', '<span>15 Genuine Customer Reviews</span>')
+html = html.replace('<span>⭐ Google Verified Business (5.0★)</span>', '<span>⭐ 5.0★ Rated • 15 Genuine Reviews</span>')
+html = html.replace('<span>🛡️ Checkatrade Vetted & Approved</span>', '<span>🛡️ Checkatrade Profile</span>')
+
+# 6) Gallery heading: don't claim before/after when images are not paired.
+html = html.replace(
+    '<h2>Recent Work - Before & After</h2>',
+    '<h2>Recent Painting & Decorating Work</h2>'
+)
+
+# 7) Improve service wording.
+html = html.replace(
+    '<div class="card"><h3>03 - Fences, Gates & Railings</h3><p>Our specialty - like your video. Rust treatment, priming, protection and spraying for metal and wood fences that last.</p></div>',
+    '<div class="card"><h3>03 - Fences, Gates & Railings</h3><p>Wood and metal fence, gate and railing painting with proper preparation, rust treatment where needed, priming and durable finishing.</p></div>'
+)
+
+# 8) Add accessibility and security attributes to external/new-tab links.
+html = html.replace(
+    'target="_blank" class="btn-gold"',
+    'target="_blank" rel="noopener noreferrer" class="btn-gold"'
+)
+html = html.replace(
+    'target="_blank" style=',
+    'target="_blank" rel="noopener noreferrer" style='
+)
+
+# 9) Fix form endpoint placeholder with a clearly marked configurable value
+# while making the page fail gracefully rather than silently posting nowhere.
+html = html.replace(
+    'action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"',
+    'action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"'
+)
+html = html.replace(
+    '// FIXED: Form handling - REPLACE YOUR_FORMSPREE_ID_HERE with real ID from formspree.io',
+    '// Form handling - set the real Formspree endpoint in the form action before launch.'
+)
+
+# Add a small mobile CTA/accessibility polish and global focus styles.
+insert_after = "        .btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,0.4)}"
+focus_css = """
+        a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+        .portfolio-item{appearance:none;text-align:left}
+        .btn-gold:disabled{opacity:0.65;cursor:not-allowed;transform:none}
+"""
+html = html.replace(insert_after, insert_after + focus_css)
+
+# Add a prefilled mailto fallback alongside phone/WhatsApp in the contact area.
+old_contact_line = '<p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)">Or call directly: <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a> | <a href="https://wa.me/447539371010" style="color:#25d366">WhatsApp</a></p>'
+new_contact_line = '<p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)">Or call directly: <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a> | <a href="https://wa.me/447539371010" style="color:#25d366">WhatsApp</a> | <a href="mailto:info@theremistouch.co.uk" style="color:var(--gold)">Email</a></p>'
+html = html.replace(old_contact_line, new_contact_line)
+
+# Add a noscript fallback for the form.
+marker = '            </form>\n        </div>'
+fallback = '''                <noscript>
+                    <p style="margin-top:1rem;color:var(--text-muted);text-align:center">
+                        JavaScript is disabled. Please call <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a>
+                        or email <a href="mailto:info@theremistouch.co.uk" style="color:var(--gold)">info@theremistouch.co.uk</a>.
+                    </p>
+                </noscript>
             </form>
-        </div>
-    </section>
+        </div>'''
+html = html.replace(marker, fallback)
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/447539371010?text=Hello%20Remis,%20I'd%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float">
-        💬 <span>Chat on WhatsApp</span>
-    </a>
-
-    <footer>
-        <h2>The Remis Touch</h2>
-        <p>Contact us directly to discuss your project or schedule an on-site visit.</p>
-        <div class="contact-details">
-            <a href="mailto:info@theremistouch.co.uk">✉️ info@theremistouch.co.uk</a>
-            <a href="tel:+447539371010">📞 +44 (0) 7539 371 010</a>
-            <a href="https://theremistouch.co.uk">🌐 theremistouch.co.uk</a>
-        </div>
-        <div class="copyright">&copy; 2026 The Remis Touch. All rights reserved.</div>
-    </footer>
-
-    <script>
-        function openLightbox(imageSrc, altText) {
-            const img = document.getElementById('lightbox-img');
-            img.src = imageSrc;
-            img.alt = altText || 'Enlarged view';
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
-
-        // Close lightbox when hitting Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-
-        // AJAX Form Submission for Formspree
-        const form = document.getElementById('contact-form');
-        const formStatus = document.getElementById('form-status');
-        const submitBtn = document.getElementById('submit-btn');
-
-        form.addEventListener('submit', async function(e) {
+# Make the script refuse to pretend the placeholder is live.
+old_js = """        form.addEventListener('submit',async(e)=>{
+            e.preventDefault();btn.disabled=true;btn.innerText='Sending...';"""
+new_js = """        form.addEventListener('submit',async(e)=>{
             e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Sending...';
-
-            const data = new FormData(form);
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    formStatus.className = 'success';
-                    formStatus.innerText = 'Thank you! Your quote request has been sent successfully.';
-                    formStatus.style.display = 'block';
-                    form.reset();
-                } else {
-                    throw new Error('Form submission failed.');
-                }
-            } catch (error) {
-                formStatus.className = 'error';
-                formStatus.innerText = 'Oops! There was a problem sending your request. Please call us directly.';
-                formStatus.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Send Request';
+            if(form.action.includes('YOUR_FORMSPREE_ID_HERE')){
+                statusEl.className='error';
+                statusEl.innerText='Online quote form is being connected. Please call 07539 371010 or WhatsApp us for a quote.';
+                statusEl.style.display='block';
+                return;
             }
-        });
-    </script>
+            btn.disabled=true;btn.innerText='Sending...';"""
+html = html.replace(old_js, new_js)
 
-</body>
-</html>
+out = Path("/mnt/data/index_x5f_10-10.html")
+out.write_text(html, encoding="utf-8")
+print(out)
