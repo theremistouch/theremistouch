@@ -1,36 +1,26 @@
-from pathlib import Path
-import re
 
-src = Path("/mnt/data/index_x5f_improved (2).html")
-html = src.read_text(encoding="utf-8")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painter & Decorator London NW10 | The Remis Touch</title>
+    <meta name="description" content="The Remis Touch is a local painter and decorator covering London NW10 and surrounding areas. Interior, exterior, fences and railings. Free quotes. Call 07539 371010.">
+    <meta name="keywords" content="painter decorator london, painter NW10, painter Willesden, painting and decorating london, exterior painter london, fence painting london">
+    <meta name="author" content="The Remis Touch">
+    
+    <meta property="og:title" content="The Remis Touch | Painter & Decorator London NW10">
+    <meta property="og:description" content="Professional interior and exterior painting, fences and railings across London NW10 and surrounding areas. Free quotes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://theremistouch.co.uk">
+    <meta property="og:image" content="https://theremistouch.co.uk/images/20260729_123044.jpg">
 
-# 1) Tighten SEO title/description.
-html = html.replace(
-    "<title>Painter & Decorator London NW10 | The Remis Touch | 07539 371010 | All Painting Work</title>",
-    "<title>Painter & Decorator London NW10 | The Remis Touch</title>"
-)
-html = html.replace(
-    '<meta name="description" content="The Remis Touch - 5.0★ Rated Painter & Decorator in NW10 London. All Painting Work: Interior, Exterior, Fences, Railings, Residential & Commercial. Free Quotes - Call 07539 371010.">',
-    '<meta name="description" content="The Remis Touch is a local painter and decorator covering London NW10 and surrounding areas. Interior, exterior, fences and railings. Free quotes. Call 07539 371010.">'
-)
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7EL6GK33CX"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-7EL6GK33CX');</script>
 
-# 2) Improve OG wording.
-html = html.replace(
-    '<meta property="og:title" content="The Remis Touch | 5.0★ Painter & Decorator in London NW10">',
-    '<meta property="og:title" content="The Remis Touch | Painter & Decorator London NW10">'
-)
-html = html.replace(
-    '<meta property="og:description" content="All Painting Work - Interior & Exterior - Fences, Railings - 15 x 5★ Reviews - Free Quotes 07539 371010">',
-    '<meta property="og:description" content="Professional interior and exterior painting, fences and railings across London NW10 and surrounding areas. Free quotes.">'
-)
-
-# 3) Replace the business schema with cleaner, more conservative local-business schema.
-schema_old = re.search(
-    r'    <script type="application/ld\+json">\s*\{\s*"@context": "https://schema\.org",.*?\n    \}\s*\n    </script>',
-    html,
-    flags=re.S
-)
-schema_new = '''    <script type="application/ld+json">
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HomeAndConstructionBusiness",
@@ -56,92 +46,218 @@ schema_new = '''    <script type="application/ld+json">
         "https://www.bark.com/en/gb/company/the-remis-touch-/GR1jwL/"
       ]
     }
-    </script>'''
-if schema_old:
-    html = html[:schema_old.start()] + schema_new + html[schema_old.end():]
+    </script>
 
-# 4) Make hero copy more customer-focused while retaining local SEO.
-html = html.replace(
-    '<div class="hero-subtitle">Painter & Decorator • NW10 • London • 5.0★ Rated (15 Reviews)</div>',
-    '<div class="hero-subtitle">Painter & Decorator • London NW10 • 5.0★ Rated (15 Genuine Reviews)</div>'
-)
-html = html.replace(
-    '<h1>Painter & Decorator in London<br><span>All Painting Work</span> - Interior, Exterior, Fences & Railings</h1>',
-    '<h1>Painter & Decorator in London NW10<br><span>Interior & Exterior Painting</span> Done Properly</h1>'
-)
-html = html.replace(
-    '<p>5.0★ rated local painter. No job too small. We prep properly, protect your property and leave a flawless finish. Clean, reliable, fully insured. Free quotes in 24h.</p>',
-    '<p>Professional painting and decorating for homes and businesses. Careful preparation, clean workmanship and a quality finish — with clear quotes and reliable service from start to finish.</p>'
-)
-
-# 5) Avoid potentially unverifiable "Google Verified" wording in visible copy.
-html = html.replace('<span>Google Verified</span>', '<span>15 Genuine Customer Reviews</span>')
-html = html.replace('<span>⭐ Google Verified Business (5.0★)</span>', '<span>⭐ 5.0★ Rated • 15 Genuine Reviews</span>')
-html = html.replace('<span>🛡️ Checkatrade Vetted & Approved</span>', '<span>🛡️ Checkatrade Profile</span>')
-
-# 6) Gallery heading: don't claim before/after when images are not paired.
-html = html.replace(
-    '<h2>Recent Work - Before & After</h2>',
-    '<h2>Recent Painting & Decorating Work</h2>'
-)
-
-# 7) Improve service wording.
-html = html.replace(
-    '<div class="card"><h3>03 - Fences, Gates & Railings</h3><p>Our specialty - like your video. Rust treatment, priming, protection and spraying for metal and wood fences that last.</p></div>',
-    '<div class="card"><h3>03 - Fences, Gates & Railings</h3><p>Wood and metal fence, gate and railing painting with proper preparation, rust treatment where needed, priming and durable finishing.</p></div>'
-)
-
-# 8) Add accessibility and security attributes to external/new-tab links.
-html = html.replace(
-    'target="_blank" class="btn-gold"',
-    'target="_blank" rel="noopener noreferrer" class="btn-gold"'
-)
-html = html.replace(
-    'target="_blank" style=',
-    'target="_blank" rel="noopener noreferrer" style='
-)
-
-# 9) Fix form endpoint placeholder with a clearly marked configurable value
-# while making the page fail gracefully rather than silently posting nowhere.
-html = html.replace(
-    'action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"',
-    'action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE"'
-)
-html = html.replace(
-    '// FIXED: Form handling - REPLACE YOUR_FORMSPREE_ID_HERE with real ID from formspree.io',
-    '// Form handling - set the real Formspree endpoint in the form action before launch.'
-)
-
-# Add a small mobile CTA/accessibility polish and global focus styles.
-insert_after = "        .btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,0.4)}"
-focus_css = """
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --bg-dark: #0b0f19; --card-bg: #161c2d; --gold: #d4af37; --gold-hover: #f3e5ab; --text-main: #f3f4f6; --text-muted: #a1a8b6; --border: rgba(212,175,55,0.2); }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+        body{background:var(--bg-dark);color:var(--text-main);line-height:1.7;overflow-x:hidden}
+        
+        header{padding:0.8rem 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(11,15,25,0.98);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:0.8rem}
+        .brand-title{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+        .header-contact{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+        .phone-link{color:var(--text-main);text-decoration:none;font-weight:700;font-size:1rem;background:rgba(212,175,55,0.15);padding:0.5rem 1rem;border-radius:4px;border:1px solid var(--border)}
+        .phone-link:hover{color:var(--gold)}
+        .btn-gold{background:linear-gradient(135deg,#d4af37 0%,#aa7c11 100%);color:#000;text-decoration:none;padding:0.8rem 1.6rem;border-radius:4px;font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;display:inline-block;border:none;cursor:pointer;text-align:center}
+        .btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,0.4)}
         a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
         .portfolio-item{appearance:none;text-align:left}
         .btn-gold:disabled{opacity:0.65;cursor:not-allowed;transform:none}
-"""
-html = html.replace(insert_after, insert_after + focus_css)
 
-# Add a prefilled mailto fallback alongside phone/WhatsApp in the contact area.
-old_contact_line = '<p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)">Or call directly: <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a> | <a href="https://wa.me/447539371010" style="color:#25d366">WhatsApp</a></p>'
-new_contact_line = '<p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)">Or call directly: <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a> | <a href="https://wa.me/447539371010" style="color:#25d366">WhatsApp</a> | <a href="mailto:info@theremistouch.co.uk" style="color:var(--gold)">Email</a></p>'
-html = html.replace(old_contact_line, new_contact_line)
+        .btn-gold-whatsapp{background:#25d366;color:#fff;margin-left:0.5rem}
+        
+        .hero{padding:2.5rem 5% 2rem;display:grid;grid-template-columns:1.2fr 0.8fr;gap:3rem;align-items:center;max-width:1400px;margin:0 auto;text-align:left}
+        .hero-subtitle{color:var(--gold);font-size:0.85rem;text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem;font-weight:700}
+        .hero h1{font-family:'Cinzel',serif;font-size:3rem;line-height:1.15;margin-bottom:1rem;font-weight:400}
+        .hero h1 span{color:var(--gold)}
+        .hero p{color:var(--text-muted);font-size:1.1rem;margin-bottom:1.5rem}
+        .hero-img{border-radius:8px;overflow:hidden;border:1px solid var(--border);height:420px}
+        .hero-img img{width:100%;height:100%;object-fit:cover}
+        .trust-row{display:flex;gap:1rem;margin:1.5rem 0;flex-wrap:wrap;align-items:center}
+        .trust-row .stars{color:var(--gold);font-weight:700}
+        .location-tag{display:inline-block;background:rgba(212,175,55,0.1);border:1px solid var(--border);padding:0.5rem 1rem;border-radius:20px;font-size:0.85rem;color:var(--gold);margin-top:1rem}
+        
+        .section{padding:3.5rem 5%;max-width:1400px;margin:0 auto}
+        .section-header{text-align:center;margin-bottom:2.5rem}
+        .section-header h2{font-family:'Cinzel',serif;font-size:2rem;letter-spacing:1px}
+        .section-header .divider{width:60px;height:2px;background:var(--gold);margin:1rem auto 0}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+        .card{background:var(--card-bg);border:1px solid var(--border);padding:2rem;border-radius:8px;transition:0.3s}
+        .card:hover{border-color:var(--gold);transform:translateY(-5px)}
+        .card h3{font-family:'Cinzel',serif;margin-bottom:0.8rem}
+        .card p{color:var(--text-muted);font-size:0.95rem}
+        
+        .image-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+        .portfolio-item{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);height:280px;background:#161c2d;cursor:pointer;width:100%;padding:0}
+        .portfolio-item img{width:100%;height:100%;object-fit:cover;transition:0.5s}
+        .portfolio-item:hover img{transform:scale(1.08)}
+        .portfolio-overlay{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(11,15,25,0.95));display:flex;justify-content:space-between}
+        .portfolio-overlay span{color:var(--gold);font-family:'Cinzel',serif;font-size:0.9rem}
+        
+        .review-card{background:var(--card-bg);border:1px solid var(--border);padding:1.8rem;border-radius:8px}
+        .stars{color:var(--gold)}
+        .review-text{color:var(--text-muted);font-style:italic;margin:0.8rem 0;font-size:0.95rem}
+        
+        .contact-container{max-width:650px;margin:0 auto;background:var(--card-bg);border:1px solid var(--border);padding:2rem;border-radius:8px}
+        .form-group{margin-bottom:1.2rem}
+        .form-group label{display:block;margin-bottom:0.4rem;color:var(--gold);font-size:0.85rem;font-weight:600}
+        .form-group input,.form-group textarea,.form-group select{width:100%;padding:0.9rem;background:#0b0f19;border:1px solid var(--border);border-radius:4px;color:#fff;font-size:1rem;outline:none}
+        .form-group input:focus{border-color:var(--gold)}
+        .gotcha-field{display:none !important}
+        #form-status{display:none;margin-top:1rem;padding:1rem;border-radius:4px;text-align:center;font-weight:600}
+        #form-status.success{background:rgba(37,211,102,0.2);border:1px solid #25d366;color:#25d366}
+        #form-status.error{background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#ef4444}
+        
+        .whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;border-radius:50px;padding:12px 18px;display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;box-shadow:0 4px 15px rgba(0,0,0,0.4);z-index:1000}
+        .trust-banner{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:1.2rem 5%;background:rgba(22,28,45,0.4);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        
+        footer{border-top:1px solid var(--border);padding:3rem 5% 2rem;text-align:center;background:#070a12}
+        .copyright{margin-top:2rem;color:#6b7280;font-size:0.8rem}
+        
+        @media(max-width:900px){
+            .hero{grid-template-columns:1fr;text-align:center}
+            .hero-img{height:300px;order:-1}
+            .hero h1{font-size:2.2rem}
+            header{justify-content:center}
+        }
+    </style>
+</head>
+<body>
 
-# Add a noscript fallback for the form.
-marker = '            </form>\n        </div>'
-fallback = '''                <noscript>
+    <header>
+        <div class="brand-title">The Remis Touch</div>
+        <div class="header-contact">
+            <a href="tel:+447539371010" class="phone-link">📞 07539 371010</a>
+            <a href="https://wa.me/447539371010?text=Hi%20Remis%2C%20I%20need%20a%20painter%20quote" class="btn-gold btn-gold-whatsapp">WhatsApp</a>
+            <a href="#contact" class="btn-gold">Free Quote</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <div class="hero-subtitle">Painter & Decorator • London NW10 • 5.0★ Rated (15 Genuine Reviews)</div>
+            <h1>Painter & Decorator in London NW10<br><span>Interior & Exterior Painting</span> Done Properly</h1>
+            <p>Professional painting and decorating for homes and businesses. Careful preparation, clean workmanship and a quality finish — with clear quotes and reliable service from start to finish.</p>
+            
+            <div class="trust-row">
+                <span class="stars">★★★★★ 5.0 (15 reviews)</span>
+                <span style="color:var(--text-muted)">•</span>
+                <span>15 Genuine Customer Reviews</span>
+                <span style="color:var(--text-muted)">•</span>
+                <span>Checkatrade Approved</span>
+            </div>
+
+            <div>
+                <a href="tel:+447539371010" class="btn-gold">Call 07539 371010</a>
+                <a href="https://wa.me/447539371010" class="btn-gold btn-gold-whatsapp">💬 WhatsApp Quote</a>
+            </div>
+            <div class="location-tag">📍 Covering: NW10 Willesden, Harlesden, Wembley, Kilburn, Brondesbury, Cricklewood, Kensal Green, Greater London</div>
+        </div>
+        <div class="hero-img">
+            <img src="images/20260723_170716.jpg" alt="Exterior painting by The Remis Touch London">
+        </div>
+    </section>
+
+    <div class="trust-banner">
+        <span>⭐ 5.0★ Rated • 15 Genuine Reviews</span>
+        <span>🛡️ Checkatrade Profile</span>
+        <span>✓ Fully Insured & Reliable</span>
+        <span>✓ Clear Upfront Pricing</span>
+    </div>
+
+    <section class="section">
+        <div class="section-header"><h2>Painting & Decorating Services</h2><div class="divider"></div></div>
+        <div class="grid">
+            <div class="card"><h3>01 - Interior Painting</h3><p>Walls, ceilings, woodwork, kitchens, hallways. Meticulous prep, sanding, filling, flawless finish. No mess left behind.</p></div>
+            <div class="card"><h3>02 - Exterior Painting</h3><p>House exteriors, rendered walls, brickwork, full weatherproof systems. Protecting your home with durable paint.</p></div>
+            <div class="card"><h3>03 - Fences, Gates & Railings</h3><p>Wood and metal fence, gate and railing painting with proper preparation, rust treatment where needed, priming and durable finishing.</p></div>
+        </div>
+        <p style="text-align:center;color:var(--text-muted);margin-top:1.5rem;font-size:0.9rem">Also: LVT Flooring & Handyman services available - ask for details</p>
+    </section>
+
+    <!-- Complete Project Gallery with all 18 Images -->
+    <section class="section" style="padding-top:0">
+        <div class="section-header"><h2>Recent Painting & Decorating Work</h2><div class="divider"></div></div>
+        <div class="image-grid">
+            <button class="portfolio-item"><img src="images/20260729_123044.jpg" alt="Kitchen Painting" loading="lazy"><span class="portfolio-overlay"><span>Kitchen Cabinet Painting</span></span></button>
+            <button class="portfolio-item"><img src="images/20260723_170716.jpg" alt="Exterior Painting London" loading="lazy"><span class="portfolio-overlay"><span>Exterior Painting</span></span></button>
+            <button class="portfolio-item"><img src="images/20260623_133920.jpg" alt="Full Exterior Transformation" loading="lazy"><span class="portfolio-overlay"><span>Full Exterior Transformation</span></span></button>
+            <button class="portfolio-item"><img src="images/20260309_144840(1).jpg" alt="Interior Refresh" loading="lazy"><span class="portfolio-overlay"><span>Interior Refresh</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_163537.jpg" alt="Garden Fence Painting" loading="lazy"><span class="portfolio-overlay"><span>Garden Fence Painting</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_163955.jpg" alt="LVT Flooring Installation" loading="lazy"><span class="portfolio-overlay"><span>LVT Flooring Installation</span></span></button>
+            <button class="portfolio-item"><img src="images/20260713_053409.jpg" alt="Precision Decorating" loading="lazy"><span class="portfolio-overlay"><span>Precision Decorating</span></span></button>
+            <button class="portfolio-item"><img src="images/20260713_053644.jpg" alt="Interior Woodwork" loading="lazy"><span class="portfolio-overlay"><span>Interior Woodwork</span></span></button>
+            <button class="portfolio-item"><img src="images/20260713_054100.jpg" alt="Wall & Ceiling Finish" loading="lazy"><span class="portfolio-overlay"><span>Wall & Ceiling Prep</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_163734.jpg" alt="Outdoor Finishing" loading="lazy"><span class="portfolio-overlay"><span>Exterior Details</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_163834.jpg" alt="Fence & Railing Refurbishment" loading="lazy"><span class="portfolio-overlay"><span>Fence Refurbishment</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_164141.jpg" alt="Custom Painting Work" loading="lazy"><span class="portfolio-overlay"><span>Custom Finish</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_164310.jpg" alt="Property Renovation" loading="lazy"><span class="portfolio-overlay"><span>Property Painting</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_164535.jpg" alt="Residential Decorating" loading="lazy"><span class="portfolio-overlay"><span>Residential Painting</span></span></button>
+            <button class="portfolio-item"><img src="images/20260731_164848.jpg" alt="Detail Work" loading="lazy"><span class="portfolio-overlay"><span>Detail Work</span></span></button>
+            <button class="portfolio-item"><img src="images/20241008_152426(1).jpg" alt="Specialist Painting Project" loading="lazy"><span class="portfolio-overlay"><span>Quality Prep & Paint</span></span></button>
+            <button class="portfolio-item"><img src="images/20231022_115514.jpg" alt="Flooring & Decorating" loading="lazy"><span class="portfolio-overlay"><span>Precision Installation</span></span></button>
+            <button class="portfolio-item"><img src="images/Screenshot_20260811_161900.jpg" alt="Project Showcase" loading="lazy"><span class="portfolio-overlay"><span>Showcase Work</span></span></button>
+        </div>
+    </section>
+
+    <section class="section" style="background:rgba(22,28,45,0.4)">
+        <div class="section-header"><h2>Why NW10 Chooses The Remis Touch</h2><div class="divider"></div></div>
+        <div class="grid">
+            <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Remis did an outstanding job painting our interior hallway and living room. Extremely professional, clean, and the finish is perfection. Highly recommended!"</p><strong>— David S. - Google Review</strong></div>
+            <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"We had LVT flooring fitted throughout. The precision and attention to detail were top-tier. Will definitely be hiring again."</p><strong>— Michael T. - Checkatrade</strong></div>
+            <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Great communication, on time, protected everything. Fence and railings look brand new. Fair price."</p><strong>— Local Client - NW10</strong></div>
+        </div>
+        <div style="text-align:center;margin-top:2rem"><a href="https://www.google.com/search?q=The+Remis+Touch" target="_blank" rel="noopener noreferrer" class="btn-gold">See All 15 Google Reviews</a></div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="section-header"><h2>Get Free Quote - 07539 371010</h2><div class="divider"></div></div>
+        <div class="contact-container">
+            <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem">Reply within 2 hours - Call, WhatsApp or fill form</p>
+            <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST">
+                <input type="text" name="_gotcha" class="gotcha-field">
+                <div class="form-group"><label>Your Name *</label><input type="text" name="name" required></div>
+                <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" required placeholder="07..."></div>
+                <div class="form-group"><label>Postcode / Area *</label><input type="text" name="location" required placeholder="NW10, Willesden, etc"></div>
+                <div class="form-group"><label>Service</label><select name="service"><option>Painting & Decorating</option><option>Exterior Painting</option><option>Fence / Railing Painting</option><option>LVT Flooring</option><option>Handyman</option></select></div>
+                <div class="form-group"><label>Job Description *</label><textarea name="message" rows="4" required placeholder="What needs painting? Approx size?"></textarea></div>
+                <button type="submit" id="submit-btn" class="btn-gold" style="width:100%">Send Quote Request</button>
+                <div id="form-status"></div>
+                <p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted)">Or call directly: <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a> | <a href="https://wa.me/447539371010" style="color:#25d366">WhatsApp</a> | <a href="mailto:info@theremistouch.co.uk" style="color:var(--gold)">Email</a></p>
+                <noscript>
                     <p style="margin-top:1rem;color:var(--text-muted);text-align:center">
                         JavaScript is disabled. Please call <a href="tel:+447539371010" style="color:var(--gold)">07539 371010</a>
                         or email <a href="mailto:info@theremistouch.co.uk" style="color:var(--gold)">info@theremistouch.co.uk</a>.
                     </p>
                 </noscript>
             </form>
-        </div>'''
-html = html.replace(marker, fallback)
+        </div>
+    </section>
 
-# Make the script refuse to pretend the placeholder is live.
-old_js = """        form.addEventListener('submit',async(e)=>{
-            e.preventDefault();btn.disabled=true;btn.innerText='Sending...';"""
-new_js = """        form.addEventListener('submit',async(e)=>{
+    <a href="https://wa.me/447539371010?text=Hi%20Remis%2C%20quote%20for%20painting%20in%20..." target="_blank" class="whatsapp-float">💬 <span>WhatsApp</span></a>
+
+    <footer>
+        <h2 style="font-family:Cinzel;color:var(--gold)">The Remis Touch</h2>
+        <p>Professional Painter & Decorator - London NW10 & Surrounding - All Painting Work</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1rem 0">
+            <a href="tel:+447539371010" style="color:var(--gold);font-weight:700;text-decoration:none">📞 07539 371010</a>
+            <a href="mailto:info@theremistouch.co.uk" style="color:var(--text-muted);text-decoration:none">info@theremistouch.co.uk</a>
+            <a href="https://theremistouch.co.uk" style="color:var(--text-muted);text-decoration:none">theremistouch.co.uk</a>
+        </div>
+        <div style="margin-top:1.5rem">
+            <a href="https://www.checkatrade.com/trades/theremistouch5945210" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted);font-size:0.8rem">Checkatrade Profile</a> | 
+            <a href="https://www.bark.com/en/gb/company/the-remis-touch-/GR1jwL/" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted);font-size:0.8rem">Bark Profile</a>
+        </div>
+        <div class="copyright">&copy; 2026 The Remis Touch - Painter & Decorator London NW10 - All Rights Reserved<br>Serving Willesden, Harlesden, Wembley, Kilburn, Brondesbury, Cricklewood, Kensal Green & Greater London</div>
+    </footer>
+
+    <script>
+        const form=document.getElementById('contact-form'),statusEl=document.getElementById('form-status'),btn=document.getElementById('submit-btn');
+        form.addEventListener('submit',async(e)=>{
             e.preventDefault();
             if(form.action.includes('YOUR_FORMSPREE_ID_HERE')){
                 statusEl.className='error';
@@ -149,9 +265,14 @@ new_js = """        form.addEventListener('submit',async(e)=>{
                 statusEl.style.display='block';
                 return;
             }
-            btn.disabled=true;btn.innerText='Sending...';"""
-html = html.replace(old_js, new_js)
-
-out = Path("/mnt/data/index_x5f_10-10.html")
-out.write_text(html, encoding="utf-8")
-print(out)
+            btn.disabled=true;btn.innerText='Sending...';
+            try{
+                const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+                if(res.ok){statusEl.className='success';statusEl.innerText='Thanks! We will call you back within 2 hours on 07539 371010';statusEl.style.display='block';form.reset();}
+                else throw new Error();
+            }catch{statusEl.className='error';statusEl.innerText='Form error - please call 07539 371010 or WhatsApp us directly.';statusEl.style.display='block';}
+            finally{btn.disabled=false;btn.innerText='Send Quote Request';}
+        });
+    </script>
+</body>
+</html>
